@@ -36,6 +36,9 @@ class HomeController extends Controller
             'popularMovies' => $this->tmdbRepository->getPopularMoviesWithoutPaginator(
                                     $request->query(TmdbRepository::PAGE_NAMES['popular'], 1), 8
                                 ),
+            'topRated' => $this->tmdbRepository->getTopRatedMoviesWithoutPaginator(
+                                    $request->query(TmdbRepository::PAGE_NAMES['topRated'], 1), 8
+                                ),
         ]);
     }
 

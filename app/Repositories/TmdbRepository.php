@@ -20,6 +20,7 @@ class TmdbRepository
     [
         'trending' => 'trending',
         'popular' => 'popular',
+        'topRated' => 'topRated',
     ];
 
     public function __construct()
@@ -162,11 +163,23 @@ class TmdbRepository
     }
 
     /**
+     * The function getTopRatedMovies retrieves popular movies from the TMDB API
+     * 
+     * @param int $page It is an integer value that determines which page of results to fetch.
+     * 
+     * @return LengthAwarePaginator $paginator.
+     */
+    public function getTopRatedMovies(int $page = 1): LengthAwarePaginator
+    {
+        return $this->makeApiCall('movie/top_rated', $page, self::PAGE_NAMES['topRated']);
+    }
+
+    /**
      * The function getTrendingMoviesWithoutPaginator retrieves trending movies from the TMDB API
      * 
      * @param int $page It is an integer value that determines which page of results to fetch.
      * 
-     * @return array.
+     * @return Collection.
      */
     public function getTrendingMoviesWithoutPaginator(int $page = 1, int $limit): Collection
     {
@@ -178,10 +191,22 @@ class TmdbRepository
      * 
      * @param int $page It is an integer value that determines which page of results to fetch.
      * 
-     * @return array.
+     * @return Collection.
      */
     public function getPopularMoviesWithoutPaginator(int $page = 1, int $limit): Collection
     {
         return $this->makeApiCallWithoutPaginator('movie/popular', $page, self::PAGE_NAMES['popular'])->take($limit);
+    }
+
+    /**
+     * The function getTopRatedMoviesWithoutPaginator retrieves top rated movies from the TMDB API
+     * 
+     * @param int $page It is an integer value that determines which page of results to fetch.
+     * 
+     * @return Collection.
+     */
+    public function getTopRatedMoviesWithoutPaginator(int $page = 1, int $limit): Collection
+    {
+        return $this->makeApiCallWithoutPaginator('movie/top_rated', $page, self::PAGE_NAMES['topRated'])->take($limit);
     }
 }
