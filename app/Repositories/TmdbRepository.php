@@ -209,4 +209,37 @@ class TmdbRepository
     {
         return $this->makeApiCallWithoutPaginator('movie/top_rated', $page, self::PAGE_NAMES['topRated'])->take($limit);
     }
+
+
+    /**
+     * The function getMovie retrieves movie data from the TMDB API using a provided ID and returns it as
+     * an array.
+     * 
+     * @param $id The id parameter is the unique identifier of the movie that you want to retrieve
+     * information for.
+     * 
+     * @return array an array.
+     */
+    public function getMovie($id): array
+    {
+        return Http::withToken($this->token)
+            ->get('https://api.themoviedb.org/3/movie/' . $id . '?append_to_response=credits,videos,images,providers')
+            ->json();
+    }
+
+    /**
+     * The function getMovieProviders retrieves information about the streaming providers for a
+     * specific movie using the TMDB API.
+     * 
+     * @param $id The id parameter is the unique identifier of a movie. It is used to specify which
+     * movie's providers you want to retrieve.
+     * 
+     * @return array
+     */
+    public function getMovieProviders($id): array
+    {
+        return Http::withToken(config('services.tmdb.token'))
+            ->get('https://api.themoviedb.org/3/movie/' . $id . '/watch/providers')
+            ->json();
+    }
 }
