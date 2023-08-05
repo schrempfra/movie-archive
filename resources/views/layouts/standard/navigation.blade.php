@@ -19,17 +19,21 @@
         </div>
         <div class="hidden lg:flex lg:gap-x-12">
             <a href="{{ route('home') }}" class="text-sm font-semibold leading-6 text-white">Browse</a>
-            {{-- <a href="#" class="text-sm font-semibold leading-6 text-white">Features</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-white">Marketplace</a>
-            <a href="#" class="text-sm font-semibold leading-6 text-white">Company</a> --}}
+
+            @auth
+                <a href="{{ route('dashboard') }}" class="text-sm font-semibold leading-6 text-white">Dashboard</a>
+            @endauth
+
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="{{ route('login') }}" class="text-sm font-semibold leading-6 text-white">Log in <span
-                    aria-hidden="true">&rarr;</span>
-            </a>
+            @guest
+                <a href="{{ route('login') }}" class="text-sm font-semibold leading-6 text-white">Log in <span
+                        aria-hidden="true">&rarr;</span>
+                </a>
+            @endguest
         </div>
     </nav>
-    
+
     <!-- Mobile menu, show/hide based on menu open state. -->
     <div class="lg:hidden" role="dialog" aria-modal="true" x-show="show">
         <!-- Background backdrop, show/hide based on slide-over state. -->
@@ -39,8 +43,7 @@
             <div class="flex items-center justify-between">
                 <a href="#" class="-m-1.5 p-1.5">
                     <span class="sr-only">Your Company</span>
-                    <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="">
+                    <x-application-logo class="h-8 w-auto fill-current text-white" />
                 </a>
                 <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-400" x-on:click="show = false">
                     <span class="sr-only">Close menu</span>
@@ -53,20 +56,22 @@
             <div class="mt-6 flow-root">
                 <div class="-my-6 divide-y divide-gray-500/25">
                     <div class="space-y-2 py-6">
-                        <a href="#"
-                            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Product</a>
-                        <a href="#"
-                            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Features</a>
-                        <a href="#"
-                            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Marketplace</a>
-                        <a href="#"
-                            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Company</a>
+                        <a href="{{ route('home') }}"
+                            class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Browse</a>
+                        
+                        @auth
+                            <a href="{{ route('dashboard') }}"
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-800">Dashboard</a>
+                        @endauth
                     </div>
-                    <div class="py-6">
-                        <a href="#"
-                            class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800">Log
-                            in</a>
-                    </div>
+                    @guest
+                        <div class="py-6">
+                            <a href="{{ route('login') }}"
+                                class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-800">Log
+                                in
+                            </a>
+                        </div>
+                    @endguest
                 </div>
             </div>
         </div>
