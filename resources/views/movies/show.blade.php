@@ -65,11 +65,11 @@
                                 <ul role="list" class="mt-8 space-y-8 text-gray-600">
                                     @if (array_key_exists('US', $providers['results']) && array_key_exists('flatrate', $providers['results']['US']))
                                         @foreach ($providers['results']['US']['flatrate'] as $provider)
-                                            <li class="flex gap-x-3">
-                                                <img class="w-1/2 col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
+                                            <li class="flex justify-between items-center">
+                                                <img class="max-h-12 object-contain"
                                                     src="https://image.tmdb.org/t/p/original/{{ $provider['logo_path'] }}"
                                                     alt="{{ $provider['provider_name'] }}">
-                                                <span class="w-1/2">{{ $provider['provider_name'] }}</span>
+                                                <span>{{ $provider['provider_name'] }}</span>
                                             </li>
                                         @endforeach
                                     @endif
