@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\TmdbRepository;
+use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
+    /**
+     * @var TmdbRepository
+     */
     protected $tmdbRepository;
 
     /**
@@ -26,7 +31,7 @@ class HomeController extends Controller
      * @param Request $request
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {   
         return view('home', [
             'trendingMovies' => $this->tmdbRepository->getTrendingMoviesWithoutPaginator(
