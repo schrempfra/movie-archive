@@ -17,9 +17,11 @@
                 </svg>
             </button>
         </div>
-        <div class="hidden lg:flex lg:gap-x-12">
+        <div class="hidden lg:flex lg:gap-x-12 items-center">
             <a href="{{ route('home') }}" class="text-sm font-semibold leading-6 text-white">Browse</a>
-
+            
+            <livewire:search-dropdown />
+            
             @auth
                 <a href="{{ route('dashboard') }}" class="text-sm font-semibold leading-6 text-white">Dashboard</a>
             @endauth
